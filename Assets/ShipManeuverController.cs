@@ -6,7 +6,8 @@ public class ShipManeuverController : MonoBehaviour
 {
     private Rigidbody2D rb;
     public float maxVelocity = 3;
-    public float rotationSpeed = 1;
+    public float rotationSpeed = 0.1f;
+    public float maxAngularVelocity = 3;
 
     #region Monobehaviour API
     // Start is called before the first frame update
@@ -17,10 +18,13 @@ public class ShipManeuverController : MonoBehaviour
     // Update is called once per frame
     private void Update() {
         float yAxis = Input.GetAxis("Vertical");
-        float xAxis = Input.GetAxis("Horizontal");
+        float xAxis = Input.GetAxis("Horizontal2");
 
         ThrustForward(yAxis);
         Rotate(transform, xAxis * -rotationSpeed);
+
+        rb.angularVelocity = Mathf.Clamp(rb.angularVelocity, -maxAngularVelocity, maxAngularVelocity);
+
     }
     #endregion
 
@@ -42,5 +46,11 @@ public class ShipManeuverController : MonoBehaviour
     {
         t.Rotate(0,0,amount);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        rb.angularVelocity = 0;
+    }
+
     #endregion
 }
