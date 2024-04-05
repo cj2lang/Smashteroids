@@ -19,4 +19,14 @@ public class Bullet : MonoBehaviour
     {
         
     }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Check if the object it collided with is a wall
+        if (collision.gameObject.tag == "Wall")
+        {
+            // Destroy the bullet
+            Destroy(gameObject);
+        }
+    }
 }
