@@ -20,13 +20,26 @@ public class Bullet : MonoBehaviour
         
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D other)
     {
+        
+        Debug.Log("Triggered: " + other.gameObject.name);
+        if(other.gameObject.tag == "Player1")
+        {
+            FindObjectOfType<GameManagement>().HurtP1();
+        }
+
+        if(other.gameObject.tag == "Player2")
+        {
+            FindObjectOfType<GameManagement>().HurtP2();
+        }
         // Check if the object it collided with is a wall
-        if (collision.gameObject.tag == "Wall")
+        if (other.gameObject.tag == "Wall")
         {
             // Destroy the bullet
             Destroy(gameObject);
         }
     }
+
+    
 }
