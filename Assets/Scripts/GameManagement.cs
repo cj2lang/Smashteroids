@@ -44,6 +44,7 @@ public class GameManagement : MonoBehaviour
     {
         p1CurrentHealth -= 1;
         p1HealthBar.SetHealth(p1CurrentHealth);
+        
     }
 
     public void HurtP2()

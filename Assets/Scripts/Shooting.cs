@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class Shooting : MonoBehaviour
 {
+    public AudioSource shootingSound;
     public Transform shootingPoint;
     public GameObject bulletPrefab;
     public float bulletSpeed = 30;
@@ -15,6 +17,7 @@ public class Shooting : MonoBehaviour
     {
         if (Gamepad.current.rightTrigger.ReadValue() > 0.1f && Time.time >= nextFireTime)
         {
+            shootingSound.Play();
             nextFireTime = Time.time + 1f / fireRate;
             GameObject bullet = Instantiate(bulletPrefab, shootingPoint.position, transform.rotation);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
