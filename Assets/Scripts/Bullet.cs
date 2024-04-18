@@ -5,13 +5,25 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float speed = 20;
+    public float collisionDelay = 0.1f;
     private Rigidbody2D rb;
+    private Collider2D bulletCollider;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        bulletCollider = GetComponent<Collider2D>();
         rb.velocity = transform.up * speed;
+
+        bulletCollider.enabled = false;
+        StartCoroutine(EnableColliderAfterDelay());
+    }
+
+    IEnumerator EnableColliderAfterDelay()
+    {
+        yield return new WaitForSeconds(collisionDelay);
+        bulletCollider.enabled = true;
     }
 
     // Update is called once per frame
