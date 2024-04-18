@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float speed = 20;
-    public float collisionDelay = 0.1f;
+    public float collisionDelay = 0.2f;
     private Rigidbody2D rb;
     private Collider2D bulletCollider;
 
