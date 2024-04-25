@@ -39,11 +39,13 @@ public class Bullet : MonoBehaviour
         if(other.gameObject.tag == "Player1")
         {
             FindObjectOfType<GameManagement>().HurtP1();
+            Destroy(gameObject);
         }
 
         if(other.gameObject.tag == "Player2")
         {
             FindObjectOfType<GameManagement>().HurtP2();
+            Destroy(gameObject);
         }
         // Check if the object it collided with is a wall
         if (other.gameObject.tag == "Wall")

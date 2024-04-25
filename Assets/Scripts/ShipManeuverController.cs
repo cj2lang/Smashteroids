@@ -1,56 +1,58 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShipManeuverController : MonoBehaviour
 {
     private Rigidbody2D rb;
-    public float maxVelocity = 3;
-    public float rotationSpeed = 0.1f;
-    public float maxAngularVelocity = 3;
+    public float thrustForce = 3.0f;
+    public float rotationSpeed = 100.0f;
+    public float maxAngularVelocity = 3.0f;
 
-    #region Monobehaviour API
-    // Start is called before the first frame update
-    private void Start() {
+    void Start()
+    {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    private void Update() {
-        float yAxis = Input.GetAxis("Vertical");
-        float xAxis = Input.GetAxis("Horizontal2");
+    void Update()
+    {
+        float thrustInput = 0f;
+        float rotateInput = 0f;
 
-        ThrustForward(yAxis);
-        Rotate(transform, xAxis * -rotationSpeed);
+        // Determine if the player is Player1 or Player2 based on the object name
+        if (gameObject.name == "Player")
+        {
+            // For Player1: Use the Vertical axis for up and down movement, and Horizontal for rotation
+            thrustInput = Input.GetAxis("Vertical");
+            rotateInput = Input.GetAxis("Horizontal");
+        }
+        else if (gameObject.name == "Player2")
+        {
+            // For Player2: Use Vertical2 for up and down movement, and Horizontal2 for rotation
+            thrustInput = Input.GetAxis("Vertical2");
+            rotateInput = Input.GetAxis("Horizontal2");
+        }
 
+        ThrustForward(thrustInput);
+        Rotate(rotateInput);
+
+        // Clamp the angular velocity to the max value
         rb.angularVelocity = Mathf.Clamp(rb.angularVelocity, -maxAngularVelocity, maxAngularVelocity);
-
-    }
-    #endregion
-
-    #region Maneuvering API
-    private void ClampVelocity(){
-        float x = Mathf.Clamp(rb.velocity.x, -maxVelocity, maxVelocity);
-        float y = Mathf.Clamp(rb.velocity.x, -maxVelocity, maxVelocity);
-
-        rb.velocity = new Vector2(x, y);
     }
 
     private void ThrustForward(float amount)
     {
-        Vector2 force = transform.up * amount;
+        Vector2 force = transform.up * amount * thrustForce;
         rb.AddForce(force);
     }
 
-    private void Rotate(Transform t, float amount)
+    private void Rotate(float amount)
     {
-        t.Rotate(0,0,amount);
+        // Assuming amount is already scaled by rotation speed and time in the input, 
+        // if not, you might want to do: amount * rotationSpeed * Time.deltaTime
+        transform.Rotate(0,0,amount);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         rb.angularVelocity = 0;
     }
-
-    #endregion
 }
