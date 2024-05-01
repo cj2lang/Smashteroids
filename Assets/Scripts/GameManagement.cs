@@ -14,7 +14,9 @@ public class GameManagement : MonoBehaviour
     public int p1CurrentHealth;
     public int p2CurrentHealth;
 
-    public GameObject gameOver;
+    public GameObject gameOverPlayer1Wins;
+    public GameObject gameOverPlayer2Wins;
+
     public HealthBar p1HealthBar;
     public HealthBar p2HealthBar;
     void Start()
@@ -29,13 +31,13 @@ public class GameManagement : MonoBehaviour
         if(p1CurrentHealth <= 0)
         {
             player1.SetActive(false);
-            gameOver.SetActive(true);
+            gameOverPlayer2Wins.SetActive(true);
         }
 
         if(p2CurrentHealth <= 0)
         {
             player2.SetActive(false);
-            gameOver.SetActive(true);
+            gameOverPlayer1Wins.SetActive(true);
         }
     }
 
