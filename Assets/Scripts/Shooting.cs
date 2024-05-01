@@ -12,6 +12,7 @@ public class Shooting : MonoBehaviour
 
     void Update()
     {
+        if(!PausedMenu.isPaused){
         // Shooting for Player1 with the controller's right trigger
         if (gameObject.name == "Player" && Gamepad.current != null &&
             Gamepad.current.rightTrigger.ReadValue() > 0.1f && Time.time >= nextFireTime)
@@ -24,6 +25,7 @@ public class Shooting : MonoBehaviour
         {
             Shoot();
         }
+      }
     }
 
     private void Shoot()

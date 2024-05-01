@@ -17,6 +17,7 @@ public class ShipManeuverController : MonoBehaviour
         float thrustInput = 0f;
         float rotateInput = 0f;
 
+        if(!PausedMenu.isPaused){
         // Determine if the player is Player1 or Player2 based on the object name
         if (gameObject.name == "Player")
         {
@@ -36,6 +37,7 @@ public class ShipManeuverController : MonoBehaviour
 
         // Clamp the angular velocity to the max value
         rb.angularVelocity = Mathf.Clamp(rb.angularVelocity, -maxAngularVelocity, maxAngularVelocity);
+      }
     }
 
     private void ThrustForward(float amount)
