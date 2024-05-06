@@ -1,0 +1,22 @@
+This is a video game built in unity for LSU CSC 4263.
+
+It is a group project by Keylor Nunez, Te'Jun Lee, Markel Wheeler, Seth Stephens, and Caleb Langley.
+
+The main game is designed to be a PvP, top-down shooter, set in outer space.
+The goal is to shoot your opponent enough to destroy them while navigating the zero gravity space.
+
+The game can be played using a controller or keyboard. Controller corresponds to player 1 while keyboard corresponds to player 2.
+
+Controller:
+    Left Stick: Forwards and Backwards
+    Right Stick: Rotate Left and Right
+    Right Trigger: Shoot
+
+Keyboard:
+    W: Forward
+    S: Backward
+    Left Arrow: Rotate Left
+    Right Arrow: Rotate Right
+    Spacebar: Shoot
+
+This game is to be demoed at Westdale Middle School at 7:30 A.M. on Friday, May 10th.
