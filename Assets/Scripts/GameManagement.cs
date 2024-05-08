@@ -5,11 +5,12 @@ using UnityEngine;
 public class GameManagement : MonoBehaviour
 {
 
+    public AudioSource hurtSound;
     public GameObject player1;
     public GameObject player2;
 
-    public int p1MaxHealth = 4;
-    public int p2MaxHealth = 4;
+    public int p1MaxHealth = 10;
+    public int p2MaxHealth = 10;
 
     public int p1CurrentHealth;
     public int p2CurrentHealth;
@@ -32,18 +33,21 @@ public class GameManagement : MonoBehaviour
         {
             player1.SetActive(false);
             gameOverPlayer2Wins.SetActive(true);
+           
         }
 
         if(p2CurrentHealth <= 0)
         {
             player2.SetActive(false);
             gameOverPlayer1Wins.SetActive(true);
+            
         }
     }
 
     //Update Player's health bar when recieving damage. 
     public void HurtP1()
     {
+        hurtSound.Play();
         p1CurrentHealth -= 1;
         p1HealthBar.SetHealth(p1CurrentHealth);
         
@@ -51,6 +55,7 @@ public class GameManagement : MonoBehaviour
 
     public void HurtP2()
     {
+        hurtSound.Play();
         p2CurrentHealth -= 1;
         p2HealthBar.SetHealth(p2CurrentHealth);
     }
